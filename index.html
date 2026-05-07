@@ -1684,7 +1684,7 @@
     letter-spacing: 0.5em;
     color: var(--gold-bright);
     text-transform: uppercase;
-    margin-bottom: 36px;
+    margin-bottom: 16px;
     text-shadow: 0 0 12px rgba(244, 196, 48, 0.5);
   }
 
@@ -2765,10 +2765,11 @@ function getIllustration(type, accent) {
     `;
 
     card.addEventListener('click', () => {
-      // If the card is currently in 'reveal' mode (back content shown without flip),
-      // a click should restore the front face. Otherwise, do the normal click-to-flip.
-      if (card.classList.contains('is-revealed')) {
-        card.classList.remove('is-revealed');
+      // Cards that were marked by 결과보기 (have .is-selected or .is-mandatory)
+      // should toggle is-revealed on click — back face ↔ front face, no spin.
+      // Other cards use the normal click-to-flip (rotateY) behavior.
+      if (card.classList.contains('is-selected') || card.classList.contains('is-mandatory')) {
+        card.classList.toggle('is-revealed');
         return;
       }
       card.classList.toggle('is-flipped');
