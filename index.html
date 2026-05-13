@@ -78,7 +78,7 @@
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.85;
   }
 
   .grain {
@@ -171,22 +171,13 @@
     z-index: 1;
   }
 
-  .particle-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 3;
-  }
-
   .sigil-glow {
     position: absolute;
     inset: -10%;
     background: radial-gradient(circle, rgba(244, 196, 48, 0.18), rgba(46, 194, 126, 0.1) 35%, transparent 65%);
     filter: blur(40px);
     opacity: 0;
-    animation: sigilGlow 4s ease-out 0.5s forwards, sigilBreathe 6s ease-in-out 4.5s infinite;
+    animation: sigilGlow 2s ease-out 0.1s forwards, sigilBreathe 6s ease-in-out 2s infinite;
   }
 
   @keyframes sigilGlow {
@@ -215,12 +206,12 @@
   }
 
   /* === Pre-mark white flash ===
-     A bright white burst fires once at ~1.7s (right when particles
-     finish converging). The triangle silhouettes then fade in from
-     within the dissipating glow, as if the light itself "became" the mark. */
+     A bright white burst fires almost immediately at page load.
+     The triangle silhouettes then fade in from within the dissipating glow,
+     as if the light itself "became" the mark. */
   .hero-flash {
     position: absolute;
-    top: 32%; left: 50%;  /* same center as .ci-triangles */
+    top: 32%; left: 50%;
     transform: translate(-50%, -50%) scale(0.2);
     width: 55%; height: 55%;
     border-radius: 50%;
@@ -233,7 +224,7 @@
     opacity: 0;
     pointer-events: none;
     z-index: 4;
-    animation: heroFlash 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.7s forwards;
+    animation: heroFlash 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
   }
 
   @keyframes heroFlash {
@@ -243,22 +234,20 @@
     100% { opacity: 0;    transform: translate(-50%, -50%) scale(2.6); }
   }
 
-  /* === Triangle entrance: gentle fade-in, no scale/rotate ===
-     Particles converge → white flash bursts → triangles fade in
-     from within the dissipating light, as if the light became the mark. */
+  /* === Triangle entrance: gentle fade-in from within the white burst === */
   .tri-yellow {
     opacity: 0;
     transform-origin: 50% 50%;
-    animation: triFadeIn 1.0s ease-out 1.95s forwards,
-               triFloatY 6s ease-in-out 4s infinite;
+    animation: triFadeIn 0.9s ease-out 0.45s forwards,
+               triFloatY 6s ease-in-out 2.5s infinite;
     filter: drop-shadow(0 0 16px rgba(245, 179, 36, 0.55));
   }
 
   .tri-green {
     opacity: 0;
     transform-origin: 50% 50%;
-    animation: triFadeIn 1.0s ease-out 2.1s forwards,
-               triFloatG 6s ease-in-out 4s infinite;
+    animation: triFadeIn 0.9s ease-out 0.6s forwards,
+               triFloatG 6s ease-in-out 2.5s infinite;
     filter: drop-shadow(0 0 22px rgba(26, 162, 89, 0.6));
   }
 
@@ -279,30 +268,28 @@
   .light-trail-yellow,
   .light-trail-green {
     opacity: 0;
-    animation: trailFadeIn 1s ease-out 2.9s forwards,
-               trailFlow 5s linear 2.9s infinite;
+    animation: trailFadeIn 1s ease-out 1.3s forwards,
+               trailFlow 5s linear 1.3s infinite;
   }
   .light-trail-green {
-    animation: trailFadeIn 1s ease-out 3.1s forwards,
-               trailFlowG 6s linear 3.1s infinite;
+    animation: trailFadeIn 1s ease-out 1.5s forwards,
+               trailFlowG 6s linear 1.5s infinite;
   }
   @keyframes trailFadeIn {
     to { opacity: 1; }
   }
   @keyframes trailFlow {
-    /* Yellow path perimeter ≈ 400. Move dashoffset from 400 → 0 to flow. */
     from { stroke-dashoffset: 400; }
     to   { stroke-dashoffset: 0; }
   }
   @keyframes trailFlowG {
-    /* Green path perimeter ≈ 460. */
     from { stroke-dashoffset: 460; }
     to   { stroke-dashoffset: 0; }
   }
 
   .spark {
     opacity: 0;
-    animation: sparkFadeIn 1s ease-out 3.1s forwards;
+    animation: sparkFadeIn 1s ease-out 1.5s forwards;
   }
   @keyframes sparkFadeIn { to { opacity: 1; } }
 
@@ -313,7 +300,7 @@
     text-align: center;
     max-width: 840px;
     opacity: 0;
-    animation: heroTextReveal 2s cubic-bezier(0.16, 1, 0.3, 1) 4s forwards;
+    animation: heroTextReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
   }
 
   @keyframes heroTextReveal {
@@ -328,7 +315,7 @@
     margin-bottom: 28px;
     text-transform: uppercase;
     opacity: 0;
-    animation: fadeUp 1s ease-out 4.2s forwards;
+    animation: fadeUp 0.9s ease-out 0.5s forwards;
   }
 
   .hero-eyebrow span {
@@ -360,7 +347,7 @@
     margin-bottom: 14px;
     color: var(--cream);
     opacity: 0;
-    animation: fadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 4.4s forwards;
+    animation: fadeUp 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
   }
 
   .hero-title .h-num {
@@ -384,7 +371,7 @@
     letter-spacing: 0.15em;
     margin-bottom: 36px;
     opacity: 0;
-    animation: fadeUp 1.4s ease-out 4.7s forwards;
+    animation: fadeUp 1.0s ease-out 0.85s forwards;
   }
 
   .hero-subtitle .divider {
@@ -404,7 +391,7 @@
     line-height: 1.7;
     margin-bottom: 48px;
     opacity: 0;
-    animation: fadeUp 1.4s ease-out 5s forwards;
+    animation: fadeUp 1.0s ease-out 1.05s forwards;
   }
 
   .tagline-en {
@@ -431,7 +418,7 @@
     background: rgba(11, 15, 31, 0.6);
     backdrop-filter: blur(8px);
     opacity: 0;
-    animation: fadeUp 1.4s ease-out 5.3s forwards;
+    animation: fadeUp 1.0s ease-out 1.25s forwards;
     box-shadow:
       0 0 40px rgba(244, 196, 48, 0.1),
       inset 0 0 20px rgba(0, 0, 0, 0.4);
@@ -476,7 +463,7 @@
     margin-top: 64px;
     text-align: center;
     opacity: 0;
-    animation: fadeUp 1.5s ease-out 6s forwards;
+    animation: fadeUp 1.2s ease-out 1.5s forwards;
     z-index: 10;
   }
 
@@ -490,32 +477,41 @@
     display: block;
   }
 
-  .scroll-arrow {
-    width: 22px;
-    height: 36px;
+  .scroll-arrows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
     margin: 0 auto;
-    border: 1px solid var(--gold);
-    border-radius: 12px;
-    position: relative;
-    box-shadow: 0 0 16px rgba(244, 196, 48, 0.3);
-    background: rgba(11, 15, 31, 0.4);
+    width: 28px;
   }
 
-  .scroll-arrow::before {
-    content: '';
-    position: absolute;
-    top: 6px; left: 50%;
-    transform: translateX(-50%);
-    width: 3px; height: 8px;
-    background: var(--gold);
-    border-radius: 2px;
-    animation: scrollDot 2s ease-in-out infinite;
+  .scroll-arrows svg {
+    width: 26px;
+    height: 12px;
+    overflow: visible;
+    opacity: 0;
+    filter: drop-shadow(0 0 6px rgba(244, 196, 48, 0.55));
+    animation: chevFlow 2.2s ease-in-out infinite;
+  }
+  .scroll-arrows svg path {
+    fill: none;
+    stroke: var(--gold-bright);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
-  @keyframes scrollDot {
-    0% { opacity: 1; transform: translate(-50%, 0); }
-    60% { opacity: 0; transform: translate(-50%, 18px); }
-    100% { opacity: 0; transform: translate(-50%, 0); }
+  /* Stagger the three chevrons so they look like light pulsing downward */
+  .scroll-arrows svg:nth-child(1) { animation-delay: 0s;     opacity: 0.35; }
+  .scroll-arrows svg:nth-child(2) { animation-delay: 0.25s;  opacity: 0.6;  }
+  .scroll-arrows svg:nth-child(3) { animation-delay: 0.5s;   opacity: 0.9;  }
+
+  @keyframes chevFlow {
+    0%   { transform: translateY(-3px); opacity: 0; }
+    35%  { opacity: 1; }
+    75%  { transform: translateY(6px);  opacity: 0.85; }
+    100% { transform: translateY(9px);  opacity: 0; }
   }
 
   /* Floating particles */
@@ -1124,28 +1120,59 @@
     transform: rotateY(180deg) translateY(-8px);
   }
 
-  /* ==== Stats Toggle ==== */
+  /* ==== Stats Toggle — visibly clickable ==== */
   .stats-toggle {
     margin: 60px auto 0;
     max-width: 1100px;
-    border: 1px solid rgba(244, 196, 48, 0.2);
-    border-radius: 4px;
-    background: rgba(11, 15, 31, 0.5);
-    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(244, 196, 48, 0.45);
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(27, 34, 71, 0.55), rgba(11, 15, 31, 0.55));
+    backdrop-filter: blur(10px);
     overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(244, 196, 48, 0.1),
+      0 6px 24px rgba(0, 0, 0, 0.4),
+      0 0 32px rgba(244, 196, 48, 0.08);
+    animation: statsBreathe 3.5s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  @keyframes statsBreathe {
+    0%, 100% {
+      box-shadow:
+        0 0 0 1px rgba(244, 196, 48, 0.1),
+        0 6px 24px rgba(0, 0, 0, 0.4),
+        0 0 32px rgba(244, 196, 48, 0.08);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgba(244, 196, 48, 0.2),
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 48px rgba(244, 196, 48, 0.18);
+    }
+  }
+
+  .stats-toggle:hover {
+    border-color: rgba(244, 196, 48, 0.75);
+    transform: translateY(-2px);
+  }
+  .stats-toggle.is-open {
+    border-color: rgba(244, 196, 48, 0.6);
+    animation: none;
   }
 
   .stats-header {
-    padding: 18px 28px;
+    padding: 22px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
     user-select: none;
     transition: background 0.3s ease;
+    position: relative;
   }
 
-  .stats-header:hover { background: rgba(244, 196, 48, 0.05); }
+  .stats-header:hover { background: rgba(244, 196, 48, 0.08); }
 
   .stats-header-left {
     display: flex;
@@ -1153,24 +1180,32 @@
     gap: 16px;
   }
 
+  .stats-header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
   .stats-icon {
-    width: 28px; height: 28px;
-    border: 1px solid var(--gold);
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--gold-bright);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gold);
+    color: var(--gold-bright);
     font-family: var(--font-display);
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(244, 196, 48, 0.3), inset 0 0 8px rgba(244, 196, 48, 0.15);
   }
 
   .stats-title {
     font-family: var(--font-korean-display);
-    font-size: 15px;
+    font-size: 16px;
     color: var(--cream);
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
   }
 
   .stats-title .en {
@@ -1182,13 +1217,45 @@
     text-transform: uppercase;
   }
 
-  .stats-arrow {
-    color: var(--gold);
-    transition: transform 0.4s ease;
-    font-size: 12px;
+  /* Right-side click hint pill */
+  .stats-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid rgba(244, 196, 48, 0.4);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 9.5px;
+    letter-spacing: 0.25em;
+    color: var(--gold-bright);
+    text-transform: uppercase;
+    background: rgba(244, 196, 48, 0.06);
+    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  }
+  .stats-toggle:hover .stats-hint {
+    background: rgba(244, 196, 48, 0.15);
+    border-color: rgba(244, 196, 48, 0.7);
+    transform: scale(1.04);
+  }
+  .stats-toggle.is-open .stats-hint {
+    opacity: 0.6;
   }
 
-  .stats-toggle.is-open .stats-arrow { transform: rotate(180deg); }
+  .stats-arrow {
+    color: var(--gold-bright);
+    transition: transform 0.4s ease;
+    font-size: 14px;
+    animation: arrowBob 1.8s ease-in-out infinite;
+  }
+  .stats-toggle.is-open .stats-arrow {
+    transform: rotate(180deg);
+    animation: none;
+  }
+  @keyframes arrowBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(3px); }
+  }
 
   .stats-body {
     max-height: 0;
@@ -1959,7 +2026,6 @@
   <div class="sigil-stage">
     <div class="sigil-glow"></div>
     <canvas class="sigil-canvas" id="sigilCanvas"></canvas>
-    <canvas class="particle-canvas" id="particleCanvas"></canvas>
     <div class="hero-flash"></div>
 
     <!-- CI Triangles (Hyundai E&C — yellow behind, green in front) -->
@@ -2032,13 +2098,13 @@
                class="light-trail-yellow"/>
           <!-- Bright sparkle traveling along yellow path (outside green only) -->
           <circle r="3" fill="#FFFFFF" filter="url(#lightGlow)" class="spark spark-y">
-            <animateMotion dur="5s" repeatCount="indefinite" begin="2.9s" rotate="auto">
+            <animateMotion dur="5s" repeatCount="indefinite" begin="1.3s" rotate="auto">
               <mpath href="#yellowPath"/>
             </animateMotion>
             <animate attributeName="r" values="2.5;4;2.5" dur="0.8s" repeatCount="indefinite"/>
           </circle>
           <circle r="1.8" fill="#FFD95C" filter="url(#lightGlow)" class="spark">
-            <animateMotion dur="5s" repeatCount="indefinite" begin="3.15s" rotate="auto">
+            <animateMotion dur="5s" repeatCount="indefinite" begin="1.55s" rotate="auto">
               <mpath href="#yellowPath"/>
             </animateMotion>
           </circle>
@@ -2055,7 +2121,7 @@
              filter="url(#lightGlow)"
              class="light-trail-green"/>
         <circle r="2.6" fill="#FFFFFF" filter="url(#lightGlow)" class="spark spark-g">
-          <animateMotion dur="6s" repeatCount="indefinite" begin="3.0s" rotate="auto">
+          <animateMotion dur="6s" repeatCount="indefinite" begin="1.4s" rotate="auto">
             <mpath href="#greenPath"/>
           </animateMotion>
           <animate attributeName="r" values="2;3.5;2" dur="0.9s" repeatCount="indefinite"/>
@@ -2092,7 +2158,11 @@
 
   <div class="scroll-indicator">
     <span class="scroll-text">Scroll to Begin</span>
-    <div class="scroll-arrow"></div>
+    <div class="scroll-arrows">
+      <svg viewBox="0 0 26 12"><path d="M2 2 L13 10 L24 2"/></svg>
+      <svg viewBox="0 0 26 12"><path d="M2 2 L13 10 L24 2"/></svg>
+      <svg viewBox="0 0 26 12"><path d="M2 2 L13 10 L24 2"/></svg>
+    </div>
   </div>
 </section>
 
@@ -2100,7 +2170,7 @@
 <section class="cards-section">
   <div class="section-header reveal-on-scroll">
     <span class="section-eyebrow">The Five Quests</span>
-    <h2 class="section-title">Choose Your Path</h2>
+    <h2 class="section-title">THE PATH FOR YOUR TEAM</h2>
     <p class="section-title-kr">매월 펼쳐질 다섯 가지 문화 퀘스트</p>
   </div>
 
@@ -2130,7 +2200,10 @@
           <span class="en">Company-wide Selection</span>
         </div>
       </div>
-      <div class="stats-arrow">▾</div>
+      <div class="stats-header-right">
+        <span class="stats-hint">Click to Open</span>
+        <div class="stats-arrow">▾</div>
+      </div>
     </div>
     <div class="stats-body">
       <div class="stats-inner" id="statsInner">
@@ -2173,6 +2246,7 @@
   const cv = document.getElementById('starsCanvas');
   const ctx = cv.getContext('2d');
   const stars = [];
+  const shootingStars = [];
 
   function resize() {
     cv.width = window.innerWidth * devicePixelRatio;
@@ -2195,8 +2269,42 @@
     });
   }
 
+  // === Shooting star (별똥별) — diagonal streak with bright tail ===
+  function spawnShooting() {
+    // Random spawn region: anywhere across the top 60% of the screen
+    const startX = Math.random() * cv.width;
+    const startY = Math.random() * cv.height * 0.55;
+    // Diagonal angle: roughly 25–55 degrees down-right (or sometimes down-left)
+    const goesLeft = Math.random() < 0.25;
+    const baseAngle = (Math.PI / 4) + (Math.random() - 0.5) * 0.5; // ~30–60°
+    const angle = goesLeft ? Math.PI - baseAngle : baseAngle;
+    const speed = (10 + Math.random() * 7) * devicePixelRatio;
+    shootingStars.push({
+      x: startX,
+      y: startY,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      tailLen: (90 + Math.random() * 70) * devicePixelRatio,
+      life: 0,
+      maxLife: 75 + Math.floor(Math.random() * 35), // ~1.2–1.8s @60fps
+      width: (1.6 + Math.random() * 0.8) * devicePixelRatio
+    });
+  }
+  // First shooter shortly after load, then random spacing centered around 20s
+  function scheduleNext() {
+    const delay = 14000 + Math.random() * 12000; // 14–26s, avg ~20s
+    setTimeout(() => {
+      spawnShooting();
+      scheduleNext();
+    }, delay);
+  }
+  setTimeout(spawnShooting, 4000);  // first one at 4s
+  scheduleNext();
+
   function draw() {
     ctx.clearRect(0, 0, cv.width, cv.height);
+
+    // ---- Twinkling stars ----
     stars.forEach(s => {
       s.tw += s.sp;
       const tw = (Math.sin(s.tw) + 1) / 2;
@@ -2210,6 +2318,57 @@
       }
       ctx.fill();
     });
+
+    // ---- Shooting stars ----
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const ss = shootingStars[i];
+      ss.life++;
+      ss.x += ss.vx;
+      ss.y += ss.vy;
+
+      // Fade in/out across the lifespan
+      let alpha;
+      if (ss.life < 8)              alpha = ss.life / 8;
+      else if (ss.life > ss.maxLife - 15) alpha = Math.max(0, (ss.maxLife - ss.life) / 15);
+      else                          alpha = 1;
+
+      // Tail end-point: behind the head along velocity direction
+      const speed = Math.hypot(ss.vx, ss.vy);
+      const ux = ss.vx / speed, uy = ss.vy / speed;
+      const tailX = ss.x - ux * ss.tailLen;
+      const tailY = ss.y - uy * ss.tailLen;
+
+      const grad = ctx.createLinearGradient(ss.x, ss.y, tailX, tailY);
+      grad.addColorStop(0,    `rgba(255, 255, 255, ${alpha})`);
+      grad.addColorStop(0.25, `rgba(255, 240, 180, ${alpha * 0.85})`);
+      grad.addColorStop(0.6,  `rgba(255, 210, 120, ${alpha * 0.4})`);
+      grad.addColorStop(1,    `rgba(255, 210, 120, 0)`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = ss.width;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(ss.x, ss.y);
+      ctx.lineTo(tailX, tailY);
+      ctx.stroke();
+
+      // Bright glowing head
+      const headGrad = ctx.createRadialGradient(ss.x, ss.y, 0, ss.x, ss.y, 6 * devicePixelRatio);
+      headGrad.addColorStop(0,    `rgba(255, 255, 255, ${alpha})`);
+      headGrad.addColorStop(0.45, `rgba(255, 240, 180, ${alpha * 0.6})`);
+      headGrad.addColorStop(1,    `rgba(255, 210, 120, 0)`);
+      ctx.fillStyle = headGrad;
+      ctx.beginPath();
+      ctx.arc(ss.x, ss.y, 6 * devicePixelRatio, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Remove if off-screen or expired
+      if (ss.life > ss.maxLife
+          || ss.x < -150 || ss.x > cv.width + 150
+          || ss.y > cv.height + 150) {
+        shootingStars.splice(i, 1);
+      }
+    }
+
     requestAnimationFrame(draw);
   }
   draw();
@@ -2325,158 +2484,6 @@
 
     ctx.shadowBlur = 0;
     requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-
-/* =========================================================================
-   3b. PARTICLE CONVERGE — golden particles fly inward and form the mark
-   =========================================================================
-   Particles start far outside the stage and quietly drift to points along
-   the two CI-triangle edges. As they arrive, the SVG triangles fade in
-   (handled by CSS), so visually it feels like the particles "form" the
-   logo. Once arrived, particles fade out gently. The whole intro takes
-   ~3 seconds and is intentionally calm — no fast or jumpy motion.
-   ========================================================================= */
-(function initConverge() {
-  const cv = document.getElementById('particleCanvas');
-  if (!cv) return;
-  const ctx = cv.getContext('2d');
-  let cx, cy, R, markCx, markCy, markScale;
-
-  // .ci-triangles is positioned at top: 32%, left: 50% of the sigil-stage,
-  // with width: 20% (50% smaller than before). Keep these in sync.
-  const MARK_TOP_PCT = 0.32;
-  const MARK_WIDTH_PCT = 0.20;
-  const SVG_VIEWBOX_SIZE = 200;
-
-  function resize() {
-    const rect = cv.getBoundingClientRect();
-    cv.width = rect.width * devicePixelRatio;
-    cv.height = rect.height * devicePixelRatio;
-    cx = cv.width / 2;
-    cy = cv.height / 2;
-    R = Math.min(cx, cy);
-    // Mark center & scale (where particles converge)
-    markCx = cv.width * 0.5;
-    markCy = cv.height * MARK_TOP_PCT;
-    markScale = (cv.width * MARK_WIDTH_PCT) / SVG_VIEWBOX_SIZE;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Map an SVG-coord triangle point to canvas-coord using the mark's
-  // current screen position and scale.
-  function svgToCanvas(sx, sy) {
-    return {
-      x: markCx + (sx - 100) * markScale,
-      y: markCy + (sy - 100) * markScale
-    };
-  }
-
-  function lerp(a, b, t) { return a + (b - a) * t; }
-  function pointOnSegment(p1, p2, t) {
-    return { x: lerp(p1.x, p2.x, t), y: lerp(p1.y, p2.y, t) };
-  }
-
-  // Triangle vertices in SVG coords
-  const yellowV = [{x:92, y:8},  {x:18, y:178}, {x:142, y:178}];
-  const greenV  = [{x:115, y:18}, {x:38, y:180}, {x:188, y:180}];
-
-  // Generate target points along the perimeter of each triangle
-  function edgePoints(verts, perEdge) {
-    const out = [];
-    for (let edge = 0; edge < 3; edge++) {
-      const p1 = verts[edge];
-      const p2 = verts[(edge + 1) % 3];
-      for (let i = 0; i < perEdge; i++) {
-        const t = (i + Math.random() * 0.6) / perEdge;
-        const pt = pointOnSegment(p1, p2, t);
-        out.push(svgToCanvas(pt.x, pt.y));
-      }
-    }
-    return out;
-  }
-
-  const targets = [
-    ...edgePoints(yellowV, 7),
-    ...edgePoints(greenV, 7)
-  ];
-
-  // Each particle: random start far outside the MARK center,
-  // drift inward to a target on a triangle edge.
-  const particles = targets.map(target => {
-    const angle = Math.random() * Math.PI * 2;
-    const startR = R * (1.0 + Math.random() * 0.45);
-    return {
-      sx: markCx + Math.cos(angle) * startR,
-      sy: markCy + Math.sin(angle) * startR,
-      tx: target.x,
-      ty: target.y,
-      delay: 100 + Math.random() * 500,
-      r: (1.0 + Math.random() * 1.4) * devicePixelRatio,
-      gold: Math.random() > 0.15
-    };
-  });
-
-  const startTime = performance.now();
-  const moveDuration = 1300;   // ms — faster drift (was 2400)
-  const fadeOutDuration = 600; // ms after arrival — also faster fade
-
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
-  }
-
-  function frame(now) {
-    const elapsed = now - startTime;
-    ctx.clearRect(0, 0, cv.width, cv.height);
-
-    let anyAlive = false;
-    particles.forEach(p => {
-      const localT = elapsed - p.delay;
-      if (localT < 0) { anyAlive = true; return; }
-
-      const moveT = Math.min(localT / moveDuration, 1);
-      const eased = easeInOutCubic(moveT);
-      const x = p.sx + (p.tx - p.sx) * eased;
-      const y = p.sy + (p.ty - p.sy) * eased;
-
-      // Alpha: fade in at start, full alpha during travel, fade out after arrival
-      let alpha;
-      if (moveT < 0.15) {
-        alpha = moveT / 0.15;
-        anyAlive = true;
-      } else if (moveT < 1) {
-        alpha = 1;
-        anyAlive = true;
-      } else {
-        const fadeT = (localT - moveDuration) / fadeOutDuration;
-        if (fadeT >= 1) return;     // gone
-        alpha = 1 - fadeT;
-        anyAlive = true;
-      }
-
-      // Glow halo
-      const haloR = p.r * 4.5;
-      const grad = ctx.createRadialGradient(x, y, 0, x, y, haloR);
-      const baseColor = p.gold ? '255, 210, 110' : '255, 240, 200';
-      grad.addColorStop(0, `rgba(${baseColor}, ${alpha * 0.85})`);
-      grad.addColorStop(0.4, `rgba(${baseColor}, ${alpha * 0.35})`);
-      grad.addColorStop(1, `rgba(${baseColor}, 0)`);
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(x, y, haloR, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Bright core
-      ctx.fillStyle = `rgba(255, 250, 230, ${alpha * 0.95})`;
-      ctx.beginPath();
-      ctx.arc(x, y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-    });
-
-    if (anyAlive) requestAnimationFrame(frame);
-    else ctx.clearRect(0, 0, cv.width, cv.height);
   }
   requestAnimationFrame(frame);
 })();
